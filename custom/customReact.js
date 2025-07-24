@@ -14,7 +14,7 @@ const ReactElement={
     type  : 'a',
     props : {
         href : 'https://google.com',
-        target : '__blank'
+        target : '_blank'
     },
 children: 'click me to visit google '
 }
