@@ -5,17 +5,20 @@ import './App.css'
 
 function App() {
   let [counter,setcounter]=useState(0);
-
+{/*assignment add a logic in which we add  the value but not exceed from 20 and nor  less than 0 */}
 
   const addvalue=()=>{
+    if(counter<20){
 counter=counter+1;
+    }
 setcounter(counter);
   }
   const removevalue=()=>{
+ if(counter>0){
 counter=counter-1;
-setcounter(counter);
   }
-
+  setcounter(counter);
+  }
   return (
     <>
       <h1>Chia aur React</h1>
