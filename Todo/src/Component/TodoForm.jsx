@@ -4,11 +4,11 @@ import UseTodo from '../context/TodoContext';
 
 function TodoForm() {
     const [todo,settodo]=useState("")
-const {addtodo}=UseTodo()
+const {Addtodo}=UseTodo()
     const add=(e)=>{
         e.preventDefault()
         if(!todo) return 
-        addtodo({todo, Completed:false  })
+        Addtodo({todo, Completed:false  })
         settodo("")
     }
 
@@ -22,7 +22,7 @@ const {addtodo}=UseTodo()
                 onChange={(e)=>{settodo(e.target.value)}}
 
                 />
-            <button type="submit" className="rounded-r-lg px-3 py-1 bg-green-600 text-white shrink-0">
+            <button type="submit"  className="rounded-r-lg px-3 cursor-pointer py-1 bg-green-600 text-white shrink-0">
                 Add
             </button>
         </form>
