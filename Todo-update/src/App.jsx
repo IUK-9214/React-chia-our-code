@@ -1,12 +1,13 @@
-
-
+import Addtodo from "./Components/Addtodo"
+import Todo from "./Components/Todo"
 
 function App() {
 
 
   return (
      <>
-     <h1>hello friends</h1>
+     <Addtodo/>
+     <Todo/>
      </>
   )
 }

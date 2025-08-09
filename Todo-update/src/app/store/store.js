@@ -1,6 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
-import TodoReducer from '../Features/TodoSlice/TodoSlices';
+import TodoReducer from '../store'; // adjust path
 
-export const  Store=configureStore({
-    reducer:TodoReducer
+
+
+ const  Store=configureStore({
+    reducer:{
+        Todos:TodoReducer,
+    }
 })
+
+export default Store ;
