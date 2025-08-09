@@ -3,13 +3,13 @@ import { useSelector,useDispatch } from 'react-redux'
 import { removeTodo } from '../Features/TodoSlice/TodoSlices'
 
 function Todo() {
-const Todos=useSelector(state=>state.Todo)
+const Todos=useSelector(state=>state.Todos.Todos)
 const dispatch =useDispatch()
 
 
    return (
     <>
-    <div>Todos</div>
+    <div></div>
     <ul className="list-none">
         {Todos.map((todo) => (
           <li
