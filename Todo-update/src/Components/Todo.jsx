@@ -1,25 +1,62 @@
-import React from 'react'
-import { useSelector,useDispatch } from 'react-redux'
-import { removeTodo } from '../Features/TodoSlice/TodoSlices'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeTodo, updateTodo } from '../Features/TodoSlice/TodoSlices'
 
 function Todo() {
-const Todos=useSelector(state=>state.Todos.Todos)
-const dispatch =useDispatch()
+  const Todos = useSelector(state => state.Todos.Todos)
+  const dispatch = useDispatch()
 
+  // ❗ CHANGE: Instead of array for all todos, store a single string
+  const [todoMsg, setTodoMsg] = useState("") 
 
-   return (
+  // ❗ CHANGE: Track which todo is being edited
+  const [isTodoEditable, setIsTodoEditable] = useState(null) 
+
+  const editTodo = (id) => {
+    // ❗ CHANGE: Pass both id and text to updateTodo
+    dispatch(updateTodo({ id: id, text: todoMsg }))
+    setIsTodoEditable(null) // reset edit state
+  }
+
+  return (
     <>
-    <div></div>
-    <ul className="list-none">
+      <div></div>
+      <ul className="list-none">
         {Todos.map((todo) => (
           <li
-            className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
+            className="mt-4 flex gap-2 justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-            <div className='text-white'>{todo.text}</div>
+            <input
+              type="text"
+              className={`border outline-none w-full bg-transparent rounded-lg text-white ${
+                isTodoEditable === todo.id ? "border-black/10 px-2" : "border-transparent"
+              } `}
+              // ❗ CHANGE: Show todoMsg only if editing this todo, otherwise show original
+              value={isTodoEditable === todo.id ? todoMsg : todo.text}
+              onChange={(e) => setTodoMsg(e.target.value)}
+              readOnly={isTodoEditable !== todo.id}
+            />
+
+            {/* Edit, Save Button */}
             <button
-             onClick={() => dispatch(removeTodo(todo.id))}
-              className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+              className="inline-flex w-8 h-8 px-4 py-1 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
+              onClick={() => {
+                if (isTodoEditable === todo.id) {
+                  editTodo(todo.id) // ❗ CHANGE: Pass the id of this todo
+                } else {
+                  setIsTodoEditable(todo.id) // start editing this todo
+                  setTodoMsg(todo.text)      // load its text into input
+                }
+              }}
+              disabled={todo.Completed}
+            >
+              {isTodoEditable === todo.id ? "📁" : "✏️"}
+            </button>
+
+            <button
+              onClick={() => dispatch(removeTodo(todo.id))}
+              className="text-white bg-red-500 border-0  py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
