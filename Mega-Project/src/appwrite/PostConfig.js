@@ -61,9 +61,56 @@ class Services {
              return true;
         } catch (error) {
             console.log("App write :: Service delete :: error ",error )
+            return false
         }
 
     }
+
+    async GetPost(slug){
+        try {
+            return await this.databases.getDocument(
+                config.AppwriteDataBaseId,
+                config.AppwriteCollectionId,
+                slug
+                
+            )
+        } catch (error) {
+            console.log("App write :: Service GetPost:: error ",error )
+            return false
+        }
+    }
+     async GetPosts(queries=[Query.equal("Status","active")]){
+        try {
+            return await this.databases.listDocuments(
+                config.AppwriteDataBaseId,
+                config.AppwriteCollectionId,
+                queries
+                
+            )
+        } catch (error) {
+            console.log("App write :: Service GetPosts:: error ",error )
+            return false
+        }
+    }
+
+    //file upload services
+
+    async FileUplaod (file){
+
+        try {
+            return await this.bucket.createFile(
+                config.AppwriteDataBaseId,
+                config.AppwriteBucketId,
+                ID.unique(),
+                file
+            )
+            
+        } catch (error) {
+            console.log("App write :: Service FileUpload:: error ",error )
+            return false
+        }
+    }
+    
 }
 
 const service = new Services();
