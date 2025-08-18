@@ -110,7 +110,32 @@ class Services {
             return false
         }
     }
-    
+    async DeleteFile(FileId){
+        try {
+             await this.bucket.deleteFile(
+                config.AppwriteBucketId,
+                FileId
+            )
+            return true
+            
+        } catch (error) {
+            console.log("App write :: Service DeleteFile :: error ",error )
+            return false
+        }
+    }   
+    async FilePreview(FileId){
+        try {
+          return await this.bucket.getFilePreview(
+                config.AppwriteBucketId,
+                FileId
+            )
+            
+            
+        } catch (error) {
+            console.log("App write :: Service FilePreview :: error ",error )
+            return false
+        }
+    }   
 }
 
 const service = new Services();
