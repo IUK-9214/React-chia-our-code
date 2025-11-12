@@ -1,9 +1,9 @@
 
 function About() {
   return (
-    <div className='bgcenter-red-500 flex justify-center items-'>
+    <div className='bg-gray-600  p-10 m10 text-white flex justify-center items-center'>
 
-    <h1 >About</h1>
+    <h1 className="font-bold text-3xl">About</h1>
     
     </div>
   )
