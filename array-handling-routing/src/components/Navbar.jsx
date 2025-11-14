@@ -8,7 +8,7 @@ function Navbar() {
 
       <ul className='flex items-center justify-center gap-10 p-10 m-10 text-white  text-xl bg-black'>
         <li>
-          <Link  to="/">
+          <Link  to="/"> 
           Home 
           </Link>
         </li>
